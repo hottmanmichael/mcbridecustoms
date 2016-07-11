@@ -9,6 +9,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     cookieSession = require('cookie-session');
 
+var authenticate = require('./middleware').authenticate;
 
 app.use(logger('dev'));
 app.use(express.static(__dirname+'/public'));
@@ -17,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 var session = cookieSession({
-    name: 'melden',
+    name: 'mcbc',
     keys: [process.env.SECRET_ONE, process.env.SECRET_TWO]
 });
 app.use(session);
@@ -26,13 +27,13 @@ app.use(session);
 //route handler
 var routes = {
     index: require('./routes/index'),
-    admin: require('./routes/admin')
+    admin: require('./routes/admin'),
+    auth: require('./routes/auth')
 };
 
 app.use('/', routes.index);
-app.use('/auth', routes.admin);
-
-
+app.use('/auth', routes.auth);
+app.use('/admin', authenticate, routes.admin);
 
 
 

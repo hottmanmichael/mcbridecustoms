@@ -1,0 +1,30 @@
+<%- include('../partials/head', {page_title: 'Login'}) %>
+
+
+
+    <body>
+        <%- include('../partials/navbar') %>
+        <div class="admin container-fluid">
+            <h1>Login</h1>
+            <form class="col-md-12" action="/auth/login" method="post">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input name="username" type="text" class="form-control" id="username" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+
+
+
+
+<%- include('../partials/foot') %>

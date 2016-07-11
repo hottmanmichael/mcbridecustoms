@@ -34,7 +34,7 @@ router.post('/login', function(req, res, next) {
 });
 
 
-router.post('/logout', function(req, res) {
+router.get('/logout', function(req, res) {
     req.session.user = null;
     res.redirect('/auth/login');
 });

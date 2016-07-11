@@ -688,23 +688,18 @@ proto.positionSlider = function() {
   x = x + this.cursorPosition;
   // reverse if right-to-left and using transform
   x = this.options.rightToLeft && transformProperty ? -x : x;
-
   var value = this.getPositionValue( x );
+  // use 3D tranforms for hardware acceleration on iOS
+  // but use 2D when settled, for better font-rendering
+  this.slider.style[ transformProperty ] = this.isAnimating ?
+    'translate3d(' + value + ',0,0)' : 'translateX(' + value + ')';
 
-  if ( transformProperty ) {
-    // use 3D tranforms for hardware acceleration on iOS
-    // but use 2D when settled, for better font-rendering
-    this.slider.style[ transformProperty ] = this.isAnimating ?
-      'translate3d(' + value + ',0,0)' : 'translateX(' + value + ')';
-  } else {
-    this.slider.style[ this.originSide ] = value;
-  }
   // scroll event
   var firstSlide = this.slides[0];
   if ( firstSlide ) {
     var positionX = -this.x - firstSlide.target;
     var progress = positionX / this.slidesWidth;
-    this.emitEvent( 'scroll', [ progress, positionX ] );
+    this.dispatchEvent( 'scroll', null, [ progress, positionX ] );
   }
 };
 
@@ -1101,6 +1096,12 @@ proto.dragStart = function( event, pointer ) {
   this.dragStartPosition = this.x;
   this.startAnimation();
   this.dispatchEvent( 'dragStart', event, [ pointer ] );
+};
+
+proto.pointerMove = function( event, pointer ) {
+  var moveVector = this._dragPointerMove( event, pointer );
+  this.dispatchEvent( 'pointerMove', event, [ pointer, moveVector ] );
+  this._dragMove( event, pointer, moveVector );
 };
 
 proto.dragMove = function( event, pointer, moveVector ) {
@@ -1747,7 +1748,7 @@ proto._containSlides = function() {
  * @param {Array} args - extra arguments
  */
 proto.dispatchEvent = function( type, event, args ) {
-  var emitArgs = [ event ].concat( args );
+  var emitArgs = event ? [ event ].concat( args ) : args;
   this.emitEvent( type, emitArgs );
 
   if ( jQuery && this.$element ) {
@@ -2120,7 +2121,7 @@ return Flickity;
 
 },{"./animate":5,"./cell":6,"./slide":14,"ev-emitter":2,"fizzy-ui-utils":3,"get-size":15}],9:[function(require,module,exports){
 /*!
- * Flickity v2.0.0
+ * Flickity v2.0.2
  * Touch, responsive, flickable carousels
  *
  * Licensed GPLv3 for open source use

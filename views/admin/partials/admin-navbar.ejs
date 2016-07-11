@@ -1,0 +1,52 @@
+
+
+<%# ADMIN NAVBAR %>
+
+<nav class="nav navbar-default navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img class="brand-image" src="/assets/mcbride_customs_logo.png" alt="Brand" />
+            <a class="navbar-brand" href="/">Mcbride Customs</a>
+        </div>
+        <div class="nav navbar-nav navbar-right navbar-link admin-nav">
+
+            <%# <a class="link navbar-brand" href="/">Home</a>
+            <a class="link navbar-brand" href="/about">About</a>
+            <a class="link navbar-brand" href="/gallery">Gallery</a>
+            <a class="link navbar-brand" href="/services">Services</a>
+            <a class="link navbar-brand" href="/contact">Contact</a>%>
+            <div class="btn-group" role="group">
+                <div class="btn-group" role="group">
+                    <a href="/admin" class="btn btn-default btn-md" >
+                        <i class="fa fa-home"></i>
+                        Admin Home
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-camera"></i>
+                        Gallery
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin/gallery">Home</a></li>
+                        <li><a href="/admin/gallery/upload">Upload</a></li>
+                        <li><a href="/admin/gallery/edit">Edit</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog"></i>
+                        Account
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin/settings">Settings</a></li>
+                        <li><a href="/auth/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>

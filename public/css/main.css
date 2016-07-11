@@ -26,6 +26,11 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* line 41, ../../src/styles/_navbar.scss */
+.admin-nav {
+  margin: 14px !important;
+}
+
 /* carousel height */
 /* line 2, ../../src/styles/_flickity.scss */
 .main-carousel {
@@ -8848,19 +8853,26 @@ body {
 }
 
 /* line 36, ../../src/styles/main.scss */
+.admin-app {
+  background: white;
+  width: 100%;
+  height: 600px;
+}
+
+/* line 42, ../../src/styles/main.scss */
 .heading-box {
   height: 700px;
   width: 100%;
 }
 
-/* line 41, ../../src/styles/main.scss */
+/* line 47, ../../src/styles/main.scss */
 .jumbotron {
   background-color: rgba(249, 249, 249, 0.7);
   background: rgba(249, 249, 249, 0.7);
   border-radius: 0 0 3px 3px !important;
 }
 
-/* line 47, ../../src/styles/main.scss */
+/* line 53, ../../src/styles/main.scss */
 .header {
   text-align: center;
   color: white;
@@ -8869,7 +8881,7 @@ body {
   margin-bottom: 40px;
 }
 
-/* line 55, ../../src/styles/main.scss */
+/* line 61, ../../src/styles/main.scss */
 .body-content {
   color: white;
   text-align: center;
@@ -8879,7 +8891,7 @@ body {
   padding-right: 15%;
 }
 
-/* line 64, ../../src/styles/main.scss */
+/* line 70, ../../src/styles/main.scss */
 .call-to-action {
   width: 150px;
   margin-left: 50%;
@@ -8887,7 +8899,7 @@ body {
   position: relative;
 }
 @media (max-width: 767px) {
-  /* line 64, ../../src/styles/main.scss */
+  /* line 70, ../../src/styles/main.scss */
   .call-to-action {
     padding: 20px;
     width: 250px;
@@ -8895,23 +8907,23 @@ body {
   }
 }
 
-/* line 78, ../../src/styles/main.scss */
+/* line 84, ../../src/styles/main.scss */
 .polylist {
   list-style: none;
   padding: 0;
 }
-/* line 81, ../../src/styles/main.scss */
+/* line 87, ../../src/styles/main.scss */
 .polylist .polylist-item {
   padding: 20px;
   text-align: center;
   height: 166.66667px;
 }
-/* line 85, ../../src/styles/main.scss */
+/* line 91, ../../src/styles/main.scss */
 .polylist .polylist-item .polylist-text {
   color: #b63d32;
   font-family: 'Yellowtail', cursive;
 }
-/* line 90, ../../src/styles/main.scss */
+/* line 96, ../../src/styles/main.scss */
 .polylist .polybreak {
   margin: 0;
   padding: 0;

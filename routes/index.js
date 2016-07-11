@@ -2,6 +2,9 @@
 var express = require('express'),
     router = express.Router();
 
+// var nodemailer = require('nodemailer');
+
+
 
 //index page
 router.get('/', function(req, res) {
@@ -18,6 +21,12 @@ router.get('/services', function(req, res) {
 });
 router.get('/contact', function(req, res) {
     res.render('contact', {page_title: 'Contact'});
+});
+
+router.post('/contact', function(req, res) {
+
+
+
 });
 
 

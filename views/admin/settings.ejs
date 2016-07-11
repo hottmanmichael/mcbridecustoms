@@ -1,0 +1,89 @@
+<%- include('../partials/head', {page_title: 'Admin Home'}) %>
+
+
+
+    <body>
+        <%- include('partials/admin-navbar') %>
+
+        <div class="admin-app container-fluid container">
+            <div class="jumbotron">
+                <h1>Settings</h1>
+            </div>
+            <div class="panel panel-default col-md-12">
+                <legend class="panel-heading">
+                    <h3>Username</h3>
+                    <h6>
+                        Update your username, you will be able to log in with either your username or email address in case you forget either.
+                    </h6>
+                </legend>
+
+                <div class="panel-body col-md-6">
+                    <form class="" action="/admin/settings/edit?username=true" method="post">
+                        <div class="form-group">
+                            <label for="username">Update Your Username</label>
+                            <input name="username" type="text" class="form-control" id="username" placeholder="New Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_username">Confirm Your New Username</label>
+                            <input name="confirm_username" type="text" class="form-control" id="confirm_username" placeholder="Confirm New Username">
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-default" name="button">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default col-md-12">
+                <legend class="panel-heading">
+                    <h3>Email</h3>
+                    <h6>
+                        This is the email that will be used for your contact page.
+                        Visitors who fill out the contact page will recieve emails from and will reply-to this email address.
+                    </h6>
+                </legend>
+                <div class="panel-body col-md-6">
+                    <form class="" action="/admin/settings/edit?email=true" method="post">
+                        <div class="form-group">
+                            <label for="email">Update Your Email Address</label>
+                            <input name="email" type="email" class="form-control" id="email" placeholder="New Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_email">Confirm your New Email</label>
+                            <input name="confirm_email" type="email" class="form-control" id="confirm_email" placeholder="Confirm New Email">
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-default" name="button">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-danger col-md-12">
+                <legend class="panel-heading">
+                    <h3>Password</h3>
+                    <h6>
+                        You can update your password here, but be careful, if you forget this new password it will be extremely difficult to recover.
+                    </h6>
+                </legend>
+
+                <div class="panel-body col-md-6">
+                    <form class="" action="/admin/settings/edit?password=true" method="post">
+                        <div class="form-group">
+                            <label for="password">Update Your Password</label>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="New Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm your New Password</label>
+                            <input name="confirm_password" type="password" class="form-control" id="confirm_password" placeholder="Confirm New Password">
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-default" name="button">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+
+
+<%- include('partials/dropdown') %>
+
+
+
+<%- include('../partials/foot') %>

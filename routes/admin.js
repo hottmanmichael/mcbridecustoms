@@ -3,12 +3,9 @@ var express = require('express'),
     router = express.Router();
 
 
-
-router.get('/login', function(req, res) {
-    res.render('login');
+router.get('/', function(req, res) {
+    res.render('admin/admin');
 });
-
-
 
 
 

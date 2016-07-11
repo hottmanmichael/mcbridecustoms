@@ -1,0 +1,31 @@
+.action-footer {
+    background-color: #3c1d17;
+    color: white;
+    height: 300px;
+    width: 100%;
+    position: relative;
+}
+
+
+.footer {
+    height: 125px;
+    width: 100%;
+    background-color: #b63d32;
+    .brand-image {
+        height: 25px;
+        width: 25px;
+        float: none;
+        margin: 0;
+        margin-top: 10px;
+        margin-left: 50%;
+        left: -12.5px;
+        position: relative;
+    }
+    .slogan {
+        width: 100%;
+        text-align: center;
+        .text {
+            color: white;
+        }
+    }
+}

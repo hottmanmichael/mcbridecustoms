@@ -1,0 +1,12 @@
+polygon {
+	width: 300px;
+    height: 500px;
+	background: white;
+    z-index: 100;
+    position: absolute;
+    right: 20%;
+    transform: skew(-14deg);
+    -webkit-transform: skew(-14deg);
+    -moz-transform: skew(-14deg);
+    -o-transform: skew(-14deg);
+}

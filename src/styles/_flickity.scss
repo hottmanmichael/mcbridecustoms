@@ -1,0 +1,11 @@
+/* carousel height */
+.main-carousel {
+    height: 500px;
+}
+
+/* cell inherit height from carousel */
+.carousel-cell {
+    height: 100%;
+    // width: %;
+    margin-right: 10px;
+}

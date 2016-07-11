@@ -1,0 +1,98 @@
+@import 'https://fonts.googleapis.com/css?family=Yellowtail';
+
+@import "navbar";
+@import "flickity";
+@import "shapes";
+@import "footer";
+@import "mquery";
+
+
+//material design theme
+@import "materials_theme.min";
+
+* {
+	box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+body {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+    margin: 0;
+}
+
+
+
+.app {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/carve.jpeg');
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.heading-box {
+    height: 700px;
+    width: 100%;
+    top: 80px;
+}
+
+.jumbotron {
+    background-color: rgba(#f9f9f9, 0.70);
+    background: rgba(#f9f9f9, 0.70);
+    border-radius: 0 0 3px 3px !important;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    font-family: 'Yellowtail', cursive;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.body-content {
+    color: white;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.call-to-action {
+    width: 150px;
+    margin-left: 50%;
+    left: -75px;
+    position: relative;
+    @include mobile {
+        padding: 20px;
+        width: 250px;
+        left: -125px;
+    }
+}
+
+
+
+.polylist {
+    list-style: none;
+    padding: 0;
+    .polylist-item {
+        padding: 20px;
+        text-align: center;
+        height: (500 / 3) * 1px;
+        .polylist-text {
+            color: #b63d32;
+            font-family: 'Yellowtail', cursive;
+        }
+    }
+    .polybreak {
+        margin: 0;
+        padding: 0;
+        border: 2px solid black;
+    }
+}

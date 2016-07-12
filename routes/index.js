@@ -1,11 +1,10 @@
 'use strict';
 var express = require('express'),
     router = express.Router();
-var knex = require('../db/knex');
-var cloudinary = require('cloudinary');
-var emailer = require('../emailer');
 
-// var nodemailer = require('nodemailer');
+var cloudinary = require('cloudinary');
+var knex = require('../db/knex');
+var Promise = require('bluebird');
 function Gallery() {
     return knex('gallery');
 }
@@ -13,7 +12,8 @@ function Gallery() {
 
 //index page
 router.get('/', function(req, res) {
-    Gallery().then(function(images) {
+    Gallery().where({isFeatured: true}).then(function(images) {
+
         images.map(function(image){
             image.img_tag = cloudinary.image(image.img_url, { width: 500, height: 500, crop: "fill" });
             return image;
@@ -29,38 +29,40 @@ router.get('/about', function(req, res) {
     res.render('about', {page_title: 'About'});
 });
 router.get('/gallery', function(req, res) {
-    res.render('gallery', {page_title: 'Gallery'});
+    Promise.join(
+        Gallery().where({order: null}).orderBy('uploaded_at', 'desc'),
+        Gallery().whereNot({order: null}).orderBy('order', 'asc')
+    ).then(function(data) {
+        //first grab newest, unorded images, then all ordered afterward
+        var nulled = data[0];
+        var ordered = data[1];
+        var images = nulled.concat(ordered);
+        images.map(function(image){
+            image.img_tag = cloudinary.image(image.img_url, { width: 270, height: 270, crop: "fill" });
+            return image;
+        });
+        var messages, errors;
+        if (req.session.messages) {
+            messages = req.session.messages;
+            req.session.messages = null;
+        }
+        if (req.session.errors) {
+            errors = req.session.errors;
+            req.session.errors = null;
+        }
+        return res.render('gallery', {
+            page_title: 'Gallery',
+            images: images,
+            messages: messages,
+            errors: errors
+        });
+    });
 });
 router.get('/services', function(req, res) {
     res.render('services', {page_title: 'Services'});
 });
 router.get('/contact', function(req, res) {
     res.render('contact', {page_title: 'Contact'});
-});
-
-router.post('/contact', function(req, res) {
-    var email = {
-        name: req.body.name,
-        email: req.body.email,
-        subject: req.body.subject,
-        text_body: req.body.text_body + " \n "+ req.body.name + " \n " + req.body.email,
-        to: 'hottmanmichael@gmail.com'
-    };
-
-    emailer.send(email, function(err, result) {
-        res.json({
-            result: result,
-            status: 'success || failure',
-            err: err
-        });
-    });
-    // emailer.sms({}, function(err, result) {
-    //     res.json({
-    //         err: err,
-    //         result: result
-    //     });
-    // });
-
 });
 
 

@@ -7,7 +7,8 @@ var express = require('express'),
     path = require('path'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
-    cookieSession = require('cookie-session');
+    cookieSession = require('cookie-session'),
+    methodOverride = require('method-override');
 
 var authenticate = require('./middleware').authenticate;
 
@@ -17,6 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 var session = cookieSession({
     name: 'mcbc',
     keys: [process.env.SECRET_ONE, process.env.SECRET_TWO]

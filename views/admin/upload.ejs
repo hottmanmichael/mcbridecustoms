@@ -1,0 +1,73 @@
+<%- include('../partials/head', {page_title: 'Login'}) %>
+
+
+
+    <body>
+        <%- include('partials/admin-navbar') %>
+        <div class="admin-app container-fluid">
+
+            <% if (errors) { %>
+                <% errors.forEach(function(err) { %>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> <%= err.message %>
+                    </div>
+                <% }) %>
+            <% } %>
+            <% if (messages) { %>
+                <% messages.forEach(function(msg) { %>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> <%= msg %>
+                    </div>
+                <% }) %>
+            <% } %>
+
+            <h1>Upload Image</h1>
+            <form class="col-md-12" action="/admin/gallery/upload" method="post" enctype="multipart/form-data">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="title">Title (optional)</label>
+                        <input name="title" type="text" class="form-control" id="title" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="image">Add an Image</label>
+                        <input type="file" name="files" id="image" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input name="isFeatured" type="checkbox">Make this image featured on the home page
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="upload-new-button" class="btn btn-default">Upload</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="recently-uploaded">
+            <h1>Recently Uploaded Images</h1>
+            <div class="panel panel-default">
+                <% if (images.length === 0)  { %>
+                       <h6 class="panel-body">No images uploaded in the last 30 minutes</h6>
+                <% } else if (images) { %>
+                    <% images.forEach(function(image) { %>
+                        <h4 class="panel-heading">Title: <%= image.title %></h4>
+                        <div class="panel-body center-block">
+                            <%- image.img_tag %>
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+
+        <%- include('../partials/footer') %>
+    </body>
+
+<%- include('partials/dropdown') %>
+
+<%- include('../partials/foot') %>

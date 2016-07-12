@@ -10,23 +10,23 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res, next) {
-    knex('admins').where({username: req.body.username})
+    knex('admins').where({username: req.body.username}).orWhere({email: req.body.username})
         .then(function(user) {
             user = user[0];
-            console.log("user: ", user, req.body.password);
             bcrypt.compare(req.body.password, user.password, function(err, result) {
-                /**FIXME: return to login */
-                if (err) {return next(err);}
-
+                /**FIXME: ADD Error return */
+                if (err) {return res.redirect('/auth/login');}
                 if (result) {
                     req.session.user = {
                         id: user.id,
                         username: user.username,
+                        email: user.email,
                         last_logged_in: user.logged_in_date,
                         logged_in_date: Date.now()
                     };
                     res.redirect('/admin');
                 } else {
+                    /**FIXME: ADD Error return */
                     res.redirect('/auth/login');
                 }
             });
@@ -47,12 +47,13 @@ router.post('/signup', function(req, res, next) {
     bcrypt.hash(req.body.password, 10, function(err, hash) {
         knex('admins').insert({
             username: req.body.username,
+            email: req.body.email,
             password: hash
-        }).then(function(data) {
+        }).then(function() {
             res.redirect('/auth/login');
         }).catch(function(err) {
             next(err);
-        })
+        });
     });
 });
 

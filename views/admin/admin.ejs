@@ -6,7 +6,9 @@
         <%- include('partials/admin-navbar') %>
         <div class="admin-app container-fluid container">
             <div class="jumbotron">
-                <h1>Welcome, Admin!</h1>
+                <h1>Welcome!</h1>
+                <p>Logged in as <%= user.username %>, <%= user.email %></p>
+                <p class="text-muted">Last logged in <%= user.last_logged_in%></p>
             </div>
             <div class="well">
                 <h1>Gallery</h1>
@@ -21,13 +23,12 @@
             </div>
         </div>
 
-
+        <%- include('../partials/footer') %>
     </body>
 
 
 
 <%- include('partials/dropdown') %>
-
 
 
 <%- include('../partials/foot') %>

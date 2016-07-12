@@ -1,18 +1,61 @@
-<%- include('partials/head') %>
+<%- include('../partials/head', {page_title: 'Admin Gallery'}) %>
 
 
 
     <body>
-        <%- include('partials/admin-navbar') %>
-        
-        <div class="carousel-box">
-            <%- include('partials/carousel') %>
-        </div>
+        <div class="admin-app container-fluid container">
+            <%- include('partials/admin-navbar') %>
 
-        <%- include('partials/footer') %>
+            <% if (errors) { %>
+                <% errors.forEach(function(err) { %>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> <%= err.message %>
+                    </div>
+                <% }) %>
+            <% } %>
+            <% if (messages) { %>
+                <% messages.forEach(function(msg) { %>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> <%= msg %>
+                    </div>
+                <% }) %>
+            <% } %>
+
+
+            <div class="container">
+                <h3>Set Featured Images</h3>
+                <div class="carousel-box">
+                    <%- include('../partials/carousel', {carousel_class: 'admin'}) %>
+                </div>
+            </div>
+
+            <hr>
+            <br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="head col-md-8">
+                        <h3 class="">Reorder or Delete Pictures</h3>
+                    </div>
+                    <div class="col-md-4 reorder">
+                        <button class="btn btn-lg btn-success" id="save-image-order"><i class="col"></i>Save Current Order</button>
+                    </div>
+                </div>
+
+                <div class="grid-box">
+                    <%- include('../partials/masongrid') %>
+                </div>
+            </div>
+
+        </div>
+        <%- include('../partials/footer') %>
     </body>
 
 
+<%- include('partials/dropdown') %>
 
 
-<%- include('partials/foot') %>
+
+<%- include('../partials/foot') %>

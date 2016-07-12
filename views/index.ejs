@@ -4,7 +4,7 @@
 
     <body>
         <%- include('partials/navbar') %>
-        <div class="app container-fluid container">
+        <div class="app container-fluid">
             <div class="heading-box">
                 <h1 class="header">Welcome to the shop!</h1>
                 <h4 class="body-content">
@@ -29,7 +29,7 @@ All internal and external carpentry  // Handmade furniture  // Complete refurbis
                     <li class="polylist-item"><h3 class="polylist-text">Handmade With Integrity</h3></li>
                 </ul>
             </polygon>
-            <%- include('partials/carousel') %>
+            <%- include('partials/carousel', {carousel_class: 'main'}) %>
         </div>
 
         <%- include('partials/footer') %>

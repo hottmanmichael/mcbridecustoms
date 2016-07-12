@@ -1,0 +1,18 @@
+
+<div class="ms-grid">
+    <div class="grid-sizer"></div>
+    <% if (images) { %>
+        <% images.forEach(function(image) { %>
+            <div class="ms-grid-item draggable" id="mason-<%= image.slug %>">
+                <a class="btn btn-default btn-sm handle"><i class="fa fa-arrows"></i> Move</a>
+                <form class="delete-image" id="remove-<%= image.slug %>" action="/admin/gallery/delete?slug=<%=image.slug%>&_method=delete" method="post">
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="remove fa fa-trash"></i> Delete</button>
+                </form>
+                <form class="add-to-featured" id="add-featured-<%= image.slug %>" action="/admin/gallery/edit/isfeatured?slug=<%=image.slug%>&action=add&_method=put" method="post">
+                    <button type="submit" class="btn btn-success btn-sm"><i class="remove fa fa-plus-square"></i> Add to Featured</button>
+                </form>
+                <%- image.img_tag %>
+            </div>
+        <% }); %>
+    <% } %>
+</div>

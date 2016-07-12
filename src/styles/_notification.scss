@@ -1,0 +1,38 @@
+$opaque: 0.85;
+$success-color: rgba(102, 187, 106, $opaque);
+$error-color: rgba(238, 83, 80, $opaque);
+$warning-color: rgba(255, 152, 0, $opaque);
+
+
+.notification-list {
+   height: auto;
+   width: 100%;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   z-index: 10000;
+   .notification {
+      height: 50px;
+      position: relative;
+      transition: height 450ms ease-in-out;
+      overflow: hidden;
+      &.fade {
+         height: 0px;
+         transition: height 450ms ease-in-out;
+      }
+      &.error {
+         background-color: $error-color;
+      }
+      &.success {
+         background-color: $success-color;
+      }
+      &.warning {
+         background-color: $warning-color;
+      }
+      .message {
+         margin: 0;
+         padding: 14px;
+         text-align: center;
+      }
+   }
+}

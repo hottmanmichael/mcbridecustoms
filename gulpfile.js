@@ -12,7 +12,7 @@ var compass = require('gulp-compass'),
    minifycss  = require('gulp-cssnano'),
    gutil = require('gulp-util');
 
-const JS_SOURCE_DIR = path.resolve(__dirname, './src/**/*.js');
+const JS_SOURCE_DIR = path.resolve(__dirname, './src/js/*.js');
 const JS_BUILD_DIR = path.resolve(__dirname, './public/js');
 const CSS_SOURCE_DIR = path.resolve(__dirname, './src/styles/**/*.scss');
 const CSS_BUILD_DIR = path.resolve(__dirname, './public/css');

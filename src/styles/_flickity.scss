@@ -1,6 +1,12 @@
+
+//Masonry
+
 /* carousel height */
 .main-carousel {
     height: 500px;
+    &.admin {
+        height: 270px;
+    }
 }
 
 /* cell inherit height from carousel */
@@ -8,4 +14,26 @@
     height: 100%;
     // width: %;
     margin-right: 10px;
+}
+
+
+
+//Packery / Draggabilly
+.grid-sizer {
+    @include mobile {
+        width: 100%;
+        max-width: 100%;
+    }
+    @include tablet {
+        width: 33.333%;
+    }
+    @include desktop {
+        width: 20%;
+    }
+}
+
+.packery-drop-placeholder {
+    outline: 3px dashed #3c1d17;
+    outline-offset: -6px;
+    transition: transform 0.2s;
 }

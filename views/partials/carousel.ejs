@@ -1,54 +1,29 @@
 
-<div class="main-carousel">
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/500/500/?random" alt="" />
+<% if (carousel_class === 'admin') { %>
+    <div class="main-carousel <%= carousel_class %>">
+        <% if (images) { %>
+            <% images.forEach(function(image) { %>
+                <% if (image.isFeatured) { %>
+                    <div class="carousel-cell" id="cell-<%=image.slug%>">
+                        <form class="remove-from-featured" action="/admin/gallery/edit/isfeatured?slug=<%=image.slug%>&action=remove&_method=put" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="remove fa fa-minus-square"></i> Remove From Featured</button>
+                        </form>
+                        <%- image.img_tag %>
+                    </div>
+                <% } %>
+            <% }) %>
+        <% } %>
     </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/400/300/?random" alt="" />
+<% } else { %>
+    <div class="main-carousel <%= carousel_class %>">
+        <% if (images) { %>
+            <% images.forEach(function(image) { %>
+                <% if (image.isFeatured) { %>
+                    <div class="carousel-cell">
+                        <%- image.img_tag %>
+                    </div>
+                <% } %>
+            <% }) %>
+        <% } %>
     </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/600/600/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/300/300/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/500/500/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/400/300/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/600/600/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/300/300/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/500/500/?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/100?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/200?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/300?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/400?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/500?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/600?random" alt="" />
-    </div>
-    <div class="carousel-cell">
-        <img height="500" width="500" src="https://unsplash.it/700?random" alt="" />
-    </div>
-
-
-
-</div>
+<% } %>

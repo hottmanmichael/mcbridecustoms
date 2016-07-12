@@ -9162,9 +9162,9 @@ h4, h5, h6, p {
 
 /* line 86, ../../src/styles/main.scss */
 .call-to-action {
-  width: 200px;
+  width: 250px;
   margin-left: 50% !important;
-  left: -100px;
+  left: -125px;
   position: relative;
   margin-top: 50px !important;
 }

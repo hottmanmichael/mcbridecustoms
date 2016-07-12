@@ -2,6 +2,8 @@
 var express = require('express'),
     router = express.Router();
 
+var emailer = require('../emailer');
+
 var cloudinary = require('cloudinary');
 var knex = require('../db/knex');
 var Promise = require('bluebird');
@@ -64,6 +66,22 @@ router.get('/services', function(req, res) {
 router.get('/contact', function(req, res) {
     res.render('contact', {page_title: 'Contact'});
 });
+
+router.post('/contact', function(req, res) {
+    // return res.json(req.body);
+    emailer.send({
+        email: req.body.email,
+        name: req.body.name,
+        subject: req.body.subject,
+        message: req.body.message
+    }, function(response) {
+        return res.json(response);
+    });
+});
+
+
+// eye appt
+// Tuesday 2nd @ 9:10;
 
 
 

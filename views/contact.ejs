@@ -1,36 +1,44 @@
 <%- include('partials/head') %>
 
 
-
     <body>
         <%- include('partials/navbar') %>
-        <h1>Contact</h1>
-        <div class="container">
-            <form class="form-group"action="/contact" method="post">
-                <div class="col-md-6">
-                    <div class="form-group col-md-12">
-                        <label for="name">Name</label>
-                        <input name="name" type="text" class="form-control" id="name" >
+        <div class="app container-fluid">
+            <h1 class="header">Contact Us!</h1>
+            <div class="contact container">
+                <%# <h1 class="header">Welcome to the shop!</h1>%>
+                <h4 class="body-content">
+                    Give us a call today at 1-630-862-8797
+                </h4>
+            </div>
+            <div class="container contact-form">
+                <h1 class="header">Or send us an email</h1>
+                <form id="emailer-form" class="form-group"action="/contact" method="post">
+                    <div class="col-md-6">
+                        <div class="form-group col-md-12">
+                            <label for="name">Your Name</label>
+                            <input name="name" type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="email">Your Email</label>
+                            <input name="email" type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="subject">Subject</label>
+                            <input name="subject" type="text" class="form-control" id="subject" required>
+                        </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="email">Email</label>
-                        <input name="email" type="email" class="form-control" id="email" >
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="subject">Subject</label>
-                        <input name="subject" type="text" class="form-control" id="subject">
-                    </div>
-                </div>
-                <div class="col-md-6">
+                    <div class="col-md-6">
 
-                    <div class="form-group col-md-12">
-                        <label for="message">Message</label>
-                        <textarea class="contact-message" name="text_body" placeholder="Type your message here"></textarea>
+                        <div class="form-group col-md-12">
+                            <label for="message">Message</label>
+                            <textarea class="contact-message" name="text_body" placeholder="Type your message here" required></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <button class="btn btn-success btn-lg" type="submit" name="button">Send Email</button>
-            </form>
+                    <button class="btn btn-success btn-lg" type="submit" name="button">Send Email</button>
+                </form>
+            </div>
         </div>
 
         <%- include('partials/footer') %>

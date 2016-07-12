@@ -12,12 +12,13 @@ function send(data, callback) {
         'api_key': process.env.ELASTIC_EMAIL_API_KEY,
         'from': data.email,
         'from_name' : data.name,
-        'to' : data.to,
+        'to' : process.env.ELASTIC_EMAIL_USERNAME,
         'subject' : data.subject,
         'template': 'Contact Form',
-        'merge_body':data.text_body,
+        'merge_text_body': data.message,
         'merge_subject': data.subject,
-        'merge_first_name': data.name
+        'merge_name': data.name,
+        'merge_email': data.email
     });
 
     // Object of options.
@@ -35,10 +36,27 @@ function send(data, callback) {
     var post_req = https.request(post_options, function(res) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-            return callback(null, chunk);
+
+            if (chunk.indexOf('Error') > -1) {
+                return callback({
+                    status: "error",
+                    error: chunk,
+                    message: "An error occured while sending your message"
+                });
+            } else {
+                return callback({
+                    status: 'success',
+                    mid: chunk,
+                    message: "Your message was sent successfully!"
+                });
+            }
         });
         res.on('error', function (e) {
-            return callback(e, null);
+            return callback({
+                status: "error",
+                error: e.message,
+                message: "An error occured while sending your message"
+            });
         });
     });
 
@@ -51,10 +69,12 @@ function send(data, callback) {
 
 function sms(data, callback) {
     var post_data = queryString.stringify({
+        'username' : process.env.ELASTIC_EMAIL_USERNAME,
         'api_key': process.env.ELASTIC_EMAIL_API_KEY,
-        // 'from': 'Me',
-        'to' : 19705679883,
-        'subject': 'Hello there'
+        'from': 'Me',
+        'to' : '+19705679883',
+        'subject': 'Hello there',
+        'body': 'hello!'
     });
 
     // Object of options.
@@ -71,10 +91,27 @@ function sms(data, callback) {
     var post_req = https.request(post_options, function(res) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-            return callback(null, chunk);
+
+            if (chunk.indexOf('Error') > -1) {
+                return callback({
+                    status: "error",
+                    error: chunk,
+                    message: "An error occured while sending your message"
+                });
+            } else {
+                return callback({
+                    status: 'success',
+                    mid: chunk,
+                    message: "Your SMS was sent successfully!"
+                });
+            }
         });
         res.on('error', function (e) {
-            return callback(e, null);
+            return callback({
+                status: "error",
+                error: e.message,
+                message: "An error occured while sending your message"
+            });
         });
     });
 
@@ -86,5 +123,5 @@ function sms(data, callback) {
 
 module.exports = {
     send: send,
-    sms: send
+    sms: sms
 };

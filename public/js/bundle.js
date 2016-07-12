@@ -7298,6 +7298,78 @@ function handleDeleteImage(url, data) {
 //     var
 // }
 
+
+
+//EMAILER
+var emailerForm = document.getElementById('emailer-form');
+console.log("emailerForm: ", emailerForm);
+    if (emailerForm) {
+        emailerForm.addEventListener('submit', handleEmail);
+    }
+
+function handleEmail(e) {
+    e.preventDefault();
+    var url = e.target.action;
+    var inputs = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        subject: document.getElementById('subject'),
+        message: document.querySelector('.contact-message')
+    };
+    var data = {
+        name: inputs.name.value,
+        email: inputs.email.value,
+        subject: inputs.subject.value,
+        message: inputs.message.value
+    };
+    Ajax(url, data, function(res) {
+        console.log("res: ", res);
+        if (res.status === 'success') {
+            handleSuccessfulEmail(res.message, inputs);
+        } else {
+            new Notification('error', res.message, 5000);
+        }
+    });
+}
+
+function handleSuccessfulEmail(message, fields) {
+
+    var modal;
+    var div = document.createElement('div');
+        div.className = "prompt";
+
+    var name = document.createElement('h3');
+        name.innerHTML = "Thank you, " + fields.name.value + "!";
+
+    var prompt = document.createElement('h4');
+        prompt.innerHTML = message;
+
+    var goHome = document.createElement('a');
+        goHome.href = "/";
+        goHome.className = 'btn btn-info btn-lg';
+        goHome.innerHTML = 'Go To Homepage';
+
+    var goGallery = document.createElement('a');
+        goGallery.href = "/gallery";
+        goGallery.className = 'btn btn-info btn-lg';
+        goGallery.innerHTML = 'Go To Gallery';
+
+    div.appendChild(name);
+    div.appendChild(prompt);
+    div.appendChild(goHome);
+    div.appendChild(goGallery);
+
+    modal = new Modal(div);
+    modal.show();
+
+    //clear form fields
+    for (var item in fields) {
+        if (fields.hasOwnProperty(item)) {
+            fields[item].value = null;
+        }
+    }
+}
+
 },{"./global/ajax":27,"./global/modal":28,"./global/notification":29,"draggabilly":2,"flickity":10,"packery":21}],27:[function(require,module,exports){
 'use strict';
 //AJAX

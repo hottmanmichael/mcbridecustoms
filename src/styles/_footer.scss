@@ -1,9 +1,21 @@
 .action-footer {
     background-color: #3c1d17;
     color: white;
-    height: 300px;
+    height: auto;
     width: 100%;
     position: relative;
+    .body {
+        padding: 25px;
+        text-align: center;
+        .main-text {
+            color: #df584b;
+            // font-size: 1em;
+        }
+        .standout-text {
+            color: white;
+            text-decoration: underline;
+        }
+    }
 }
 
 

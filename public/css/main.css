@@ -158,19 +158,33 @@ polygon {
 .action-footer {
   background-color: #3c1d17;
   color: white;
-  height: 300px;
+  height: auto;
   width: 100%;
   position: relative;
 }
-
+/* line 7, ../../src/styles/_footer.scss */
+.action-footer .body {
+  padding: 25px;
+  text-align: center;
+}
 /* line 10, ../../src/styles/_footer.scss */
+.action-footer .body .main-text {
+  color: #df584b;
+}
+/* line 14, ../../src/styles/_footer.scss */
+.action-footer .body .standout-text {
+  color: white;
+  text-decoration: underline;
+}
+
+/* line 22, ../../src/styles/_footer.scss */
 .footer {
   height: 160px;
   width: 100%;
   background-color: #b63d32;
   position: relative;
 }
-/* line 15, ../../src/styles/_footer.scss */
+/* line 27, ../../src/styles/_footer.scss */
 .footer .brand-image {
   height: 25px;
   width: 25px;
@@ -181,16 +195,16 @@ polygon {
   left: -12.5px;
   position: relative;
 }
-/* line 25, ../../src/styles/_footer.scss */
+/* line 37, ../../src/styles/_footer.scss */
 .footer .slogan {
   width: 100%;
   text-align: center;
 }
-/* line 28, ../../src/styles/_footer.scss */
+/* line 40, ../../src/styles/_footer.scss */
 .footer .slogan .text {
   color: white;
 }
-/* line 33, ../../src/styles/_footer.scss */
+/* line 45, ../../src/styles/_footer.scss */
 .footer .admin-link .admin-login {
   position: absolute;
   left: -50px;
@@ -9082,16 +9096,21 @@ body {
   position: relative;
 }
 
-/* line 34, ../../src/styles/main.scss */
+/* line 33, ../../src/styles/main.scss */
+h4, h5, h6, p {
+  line-height: 1.5;
+}
+
+/* line 37, ../../src/styles/main.scss */
 .app {
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/carve.jpeg");
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/carve.jpeg");
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/carve.jpeg");
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/carve.jpeg");
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-/* line 41, ../../src/styles/main.scss */
+/* line 44, ../../src/styles/main.scss */
 .admin-app {
   background: white;
   width: 100%;
@@ -9099,20 +9118,30 @@ body {
   margin-bottom: 50px;
 }
 
-/* line 48, ../../src/styles/main.scss */
+/* line 51, ../../src/styles/main.scss */
 .heading-box {
-  height: 700px;
+  height: auto;
   width: 100%;
+  padding-left: 75px;
+  padding-right: 75px;
+  margin-bottom: 80px;
+}
+@media (max-width: 767px) {
+  /* line 51, ../../src/styles/main.scss */
+  .heading-box {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 
-/* line 53, ../../src/styles/main.scss */
+/* line 63, ../../src/styles/main.scss */
 .jumbotron {
   background-color: rgba(249, 249, 249, 0.7);
   background: rgba(249, 249, 249, 0.7);
   border-radius: 0 0 3px 3px !important;
 }
 
-/* line 59, ../../src/styles/main.scss */
+/* line 69, ../../src/styles/main.scss */
 .header {
   text-align: center;
   color: white;
@@ -9121,23 +9150,26 @@ body {
   margin-bottom: 40px;
 }
 
-/* line 67, ../../src/styles/main.scss */
+/* line 77, ../../src/styles/main.scss */
 .body-content {
   color: white;
   text-align: center;
   font-family: 'Roboto', sans-serif;
   width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
-/* line 75, ../../src/styles/main.scss */
+/* line 86, ../../src/styles/main.scss */
 .call-to-action {
-  width: 150px;
+  width: 200px;
   margin-left: 50% !important;
-  left: -75px;
+  left: -100px;
   position: relative;
+  margin-top: 50px !important;
 }
 @media (max-width: 767px) {
-  /* line 75, ../../src/styles/main.scss */
+  /* line 86, ../../src/styles/main.scss */
   .call-to-action {
     padding: 20px;
     width: 250px;
@@ -9145,12 +9177,12 @@ body {
   }
 }
 
-/* line 87, ../../src/styles/main.scss */
+/* line 99, ../../src/styles/main.scss */
 .btn-md, .btn-lg {
   margin: 10px;
 }
 
-/* line 91, ../../src/styles/main.scss */
+/* line 103, ../../src/styles/main.scss */
 .alert-dismissible {
   top: 18px;
   position: relative;
@@ -9158,41 +9190,53 @@ body {
   font-size: 20px;
 }
 
-/* line 100, ../../src/styles/main.scss */
+/* line 112, ../../src/styles/main.scss */
 .polylist {
   list-style: none;
   padding: 0;
 }
-/* line 103, ../../src/styles/main.scss */
+/* line 115, ../../src/styles/main.scss */
 .polylist .polylist-item {
   padding: 20px;
   text-align: center;
   height: 166.66667px;
 }
-/* line 107, ../../src/styles/main.scss */
+/* line 119, ../../src/styles/main.scss */
 .polylist .polylist-item .polylist-text {
   color: #b63d32;
   font-family: 'Yellowtail', cursive;
 }
-/* line 112, ../../src/styles/main.scss */
+/* line 124, ../../src/styles/main.scss */
 .polylist .polybreak {
   margin: 0;
   padding: 0;
   border: 2px solid black;
 }
 
-/* line 119, ../../src/styles/main.scss */
+/* line 131, ../../src/styles/main.scss */
 .loading-spinner {
   font-size: 16px;
 }
 
-/* line 123, ../../src/styles/main.scss */
-label {
-  font-size: 16px;
+/* line 137, ../../src/styles/main.scss */
+.contact-form label {
+  color: white;
 }
-
-/* line 127, ../../src/styles/main.scss */
-.contact-message {
+/* line 140, ../../src/styles/main.scss */
+.contact-form input {
+  color: white;
+  font-size: 24px !important;
+}
+/* line 144, ../../src/styles/main.scss */
+.contact-form .contact-message {
   width: 100%;
   height: 208px;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+/* line 152, ../../src/styles/main.scss */
+label {
+  font-size: 16px;
 }

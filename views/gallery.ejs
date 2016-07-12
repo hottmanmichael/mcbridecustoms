@@ -4,7 +4,12 @@
 
     <body>
         <%- include('partials/navbar') %>
-        <h1>Gallery</h1>
+        <div class="app container-fluid">
+            <h1 class="header">Featured Works</h1>
+            <div class="grid-box container">
+                <%- include('partials/masongrid', {mason_class: 'client'}) %>
+            </div>
+        </div>
 
         <%- include('partials/footer') %>
     </body>

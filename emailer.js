@@ -12,7 +12,7 @@ function send(data, callback) {
         'api_key': process.env.ELASTIC_EMAIL_API_KEY,
         'from': data.email,
         'from_name' : data.name,
-        'to' : process.env.ELASTIC_EMAIL_USERNAME,
+        'to' : process.env.ELASTIC_EMAIL_TO_ADDRESS,
         'subject' : data.subject,
         'template': 'Contact Form',
         'merge_text_body': data.message,

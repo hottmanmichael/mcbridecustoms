@@ -198,13 +198,25 @@ router.put('/gallery/edit/isfeatured', function(req, res, next) {
 //delete photo
 router.delete('/gallery/delete', function(req, res, next) {
     var slug = req.query.slug;
-    Gallery().where({slug: slug}).del().then(function(deleted) {
-        return res.json({
-            status: 'success',
-            message: 'Image delete successfully.',
-            slug: slug
+
+    Gallery().where({slug: slug}).then(function(image) {
+        image = image[0];
+
+        var pid = image.img_url.substring(image.img_url.lastIndexOf('/')+1, image.img_url.lastIndexOf('.'));
+
+        cloudinary.uploader.destroy(pid, function(result) {
+            //image removed
         });
+
+        Gallery().where({slug: slug}).del().then(function(deleted) {
+            return res.json({
+                status: 'success',
+                message: 'Image delete successfully.',
+                slug: slug
+            });
+        }).catch(next);
     }).catch(next);
+
 });
 
 router.post('/gallery/edit/order', function(req, res) {

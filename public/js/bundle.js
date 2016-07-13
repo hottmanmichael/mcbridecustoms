@@ -7044,6 +7044,28 @@ var Ajax = require('./global/ajax').Ajax;
 var Notification = require('./global/notification');
 var Modal = require('./global/modal');
 
+
+var menuButton = document.querySelector('.mobile-menu.button');
+var mobileMenu = document.querySelector('.mobile-menu.menu');
+var menuItems = document.querySelectorAll('.menu-item');
+    if (menuButton) {
+        console.log("menuButton: ", menuButton);
+        menuButton.addEventListener('click', function(e) {
+            mobileMenu.classList.toggle('open');
+        });
+    }
+    // if (menuItems) {
+    //     for (var i = 0; i < menuItems.length; i++) {
+    //         menuItems[i].addEventListener('click', function() {
+    //             //close menu when item is clicked in menu
+    //             console.log("menuItems: ", menuItems[i]);
+    //             mobileMenu.classList.remove('open');
+    //         });
+    //     }
+    // }
+
+
+
 var ms_selector = document.querySelector('.ms-grid');
 var mason;
 var carousel = document.querySelector('.main-carousel');

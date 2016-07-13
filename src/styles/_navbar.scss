@@ -44,35 +44,35 @@
 }
 
 
-.mobile-menu {
-    @include mobile {
-        display: block;
-    }
-    @include tablet {
-        display: none;
-    }
-    @include desktop {
-        display: none;
-    }
-}
-.mobile-menu {
-    opacity: 0;
-    background: white;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    z-index: 1500;
-    top: 0;
-    right: 0;
-    width: 550px; //desktop
-    min-width: 550px;
-    transform: translateY(630px);
-    transition: transform 450ms cubic-bezier(.36,.02,.11,.95);
-    box-shadow: 0 0 3px rgba(26, 26, 26, 0.89);
-    overflow: scroll;
-    &.open {
-        opacity: 1;
-        transform: translateX(0px);
-        transition: all 250ms cubic-bezier(.36,.02,.11,.95);
-    }
-}
+// .mobile-menu {
+//     @include mobile {
+//         display: block;
+//     }
+//     @include tablet {
+//         display: none;
+//     }
+//     @include desktop {
+//         display: none;
+//     }
+// }
+// .mobile-menu {
+//     opacity: 0;
+//     background: white;
+//     height: 100%;
+//     width: 100%;
+//     position: fixed;
+//     z-index: 1500;
+//     top: 0;
+//     right: 0;
+//     width: 550px; //desktop
+//     min-width: 550px;
+//     transform: translateY(630px);
+//     transition: transform 450ms cubic-bezier(.36,.02,.11,.95);
+//     box-shadow: 0 0 3px rgba(26, 26, 26, 0.89);
+//     overflow: scroll;
+//     &.open {
+//         opacity: 1;
+//         transform: translateX(0px);
+//         transition: all 250ms cubic-bezier(.36,.02,.11,.95);
+//     }
+// }

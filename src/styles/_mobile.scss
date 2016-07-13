@@ -1,0 +1,51 @@
+// @import "mquery";
+
+.mobile-menu {
+    @include mobile {
+        display: block;
+    }
+    @include tablet {
+        display: none;
+    }
+    @include desktop {
+        display: none;
+    }
+    &.button {
+        font-size: 30px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 17px;
+        color: #ffebee;
+        z-index: 3000;
+    }
+    &.menu {
+        background-color: #b63d32;
+        color: #ffebee;
+        opacity: 0;
+        max-height: 0px;
+        width: 100%;
+        position: fixed;
+        z-index: 1500;
+        top: 0;
+        left: 0;
+        transform: translateY(-700px);
+        transition: all 450ms cubic-bezier(.36,.02,.11,.95);
+        box-shadow: 0 0 3px rgba(26, 26, 26, 0.89);
+        overflow: scroll;
+        padding-left: 30px;
+        & .menu-icon {
+            float: left;
+            position: relative;
+            font-size: 25px;
+            padding: 18px;
+        }
+        &.open {
+            opacity: 1;
+            max-height: 700px;
+            height: 100%;
+            transform: translateY(0px);
+            transition: all 450ms cubic-bezier(.36,.02,.11,.95);
+        }
+    }
+}

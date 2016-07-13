@@ -9,4 +9,11 @@ polygon {
     -webkit-transform: skew(-14deg);
     -moz-transform: skew(-14deg);
     -o-transform: skew(-14deg);
+	@include mobile {
+		// opacity: 0;
+		position: relative;
+		transform: skew(0deg);
+		width: 100%;
+		right: 0;
+	}
 }

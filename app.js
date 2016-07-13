@@ -69,7 +69,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('404', {
+    res.render('pages/404', {
         error: {
             message: err.message,
             error: err.status

@@ -49,6 +49,9 @@ var uploader = {
                     form.uploadDir = UPLOAD_DIR;
                     form.keepExtensions = true;
 
+                // form.on('fileBegin', function(name, file) {
+                //     console.log("file: ", file.size);
+                // });
                 form.on('end', function() {
                     var image_path = path.resolve(UPLOAD_DIR+'/'+this.openedFiles[0].name);
                     fs.rename(this.openedFiles[0].path, image_path, function(err) {
@@ -57,6 +60,7 @@ var uploader = {
                 });
                 form.parse(request, function (err, fields, files) {
                     files = files.files;
+
                     var ext = files.name.substring(files.name.indexOf('.'), files.name.length);
                     var slug = randomString({
                         length: 12,

@@ -531,7 +531,7 @@ return Draggabilly;
 
 }));
 
-},{"get-size":16,"unidragger":24}],3:[function(require,module,exports){
+},{"get-size":17,"unidragger":26}],3:[function(require,module,exports){
 /**
  * EvEmitter v1.0.3
  * Lil' event emitter
@@ -881,6 +881,71 @@ return utils;
 }));
 
 },{"desandro-matches-selector":1}],5:[function(require,module,exports){
+/*!
+ * Flickity imagesLoaded v2.0.0
+ * enables imagesLoaded option for Flickity
+ */
+
+/*jshint browser: true, strict: true, undef: true, unused: true */
+
+( function( window, factory ) {
+  // universal module definition
+  /*jshint strict: false */ /*globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'flickity/js/index',
+      'imagesloaded/imagesloaded'
+    ], function( Flickity, imagesLoaded ) {
+      return factory( window, Flickity, imagesLoaded );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('flickity'),
+      require('imagesloaded')
+    );
+  } else {
+    // browser global
+    window.Flickity = factory(
+      window,
+      window.Flickity,
+      window.imagesLoaded
+    );
+  }
+
+}( window, function factory( window, Flickity, imagesLoaded ) {
+'use strict';
+
+Flickity.createMethods.push('_createImagesLoaded');
+
+var proto = Flickity.prototype;
+
+proto._createImagesLoaded = function() {
+  this.on( 'activate', this.imagesLoaded );
+};
+
+proto.imagesLoaded = function() {
+  if ( !this.options.imagesLoaded ) {
+    return;
+  }
+  var _this = this;
+  function onImagesLoadedProgress( instance, image ) {
+    var cell = _this.getParentCell( image.img );
+    _this.cellSizeChange( cell && cell.element );
+    if ( !_this.options.freeScroll ) {
+      _this.positionSliderAtSelected();
+    }
+  }
+  imagesLoaded( this.slider ).on( 'progress', onImagesLoadedProgress );
+};
+
+return Flickity;
+
+}));
+
+},{"flickity":11,"imagesloaded":18}],6:[function(require,module,exports){
 // add, remove cell
 ( function( window, factory ) {
   // universal module definition
@@ -1064,7 +1129,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4}],6:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":4}],7:[function(require,module,exports){
 // animate
 ( function( window, factory ) {
   // universal module definition
@@ -1285,7 +1350,7 @@ return proto;
 
 }));
 
-},{"fizzy-ui-utils":4}],7:[function(require,module,exports){
+},{"fizzy-ui-utils":4}],8:[function(require,module,exports){
 // Flickity.Cell
 ( function( window, factory ) {
   // universal module definition
@@ -1377,7 +1442,7 @@ return Cell;
 
 }));
 
-},{"get-size":16}],8:[function(require,module,exports){
+},{"get-size":17}],9:[function(require,module,exports){
 // drag
 ( function( window, factory ) {
   // universal module definition
@@ -1752,7 +1817,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4,"unidragger":24}],9:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":4,"unidragger":26}],10:[function(require,module,exports){
 // Flickity main
 ( function( window, factory ) {
   // universal module definition
@@ -2597,7 +2662,7 @@ return Flickity;
 
 }));
 
-},{"./animate":6,"./cell":7,"./slide":15,"ev-emitter":3,"fizzy-ui-utils":4,"get-size":16}],10:[function(require,module,exports){
+},{"./animate":7,"./cell":8,"./slide":16,"ev-emitter":3,"fizzy-ui-utils":4,"get-size":17}],11:[function(require,module,exports){
 /*!
  * Flickity v2.0.2
  * Touch, responsive, flickable carousels
@@ -2641,7 +2706,7 @@ return Flickity;
   return Flickity;
 });
 
-},{"./add-remove-cell":5,"./drag":8,"./flickity":9,"./lazyload":11,"./page-dots":12,"./player":13,"./prev-next-button":14}],11:[function(require,module,exports){
+},{"./add-remove-cell":6,"./drag":9,"./flickity":10,"./lazyload":12,"./page-dots":13,"./player":14,"./prev-next-button":15}],12:[function(require,module,exports){
 // lazyload
 ( function( window, factory ) {
   // universal module definition
@@ -2762,7 +2827,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4}],12:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":4}],13:[function(require,module,exports){
 // page dots
 ( function( window, factory ) {
   // universal module definition
@@ -2946,7 +3011,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4,"tap-listener":23}],13:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":4,"tap-listener":25}],14:[function(require,module,exports){
 // player & autoPlay
 ( function( window, factory ) {
   // universal module definition
@@ -3161,7 +3226,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"ev-emitter":3,"fizzy-ui-utils":4}],14:[function(require,module,exports){
+},{"./flickity":10,"ev-emitter":3,"fizzy-ui-utils":4}],15:[function(require,module,exports){
 // prev/next buttons
 ( function( window, factory ) {
   // universal module definition
@@ -3389,7 +3454,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4,"tap-listener":23}],15:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":4,"tap-listener":25}],16:[function(require,module,exports){
 // slide
 ( function( window, factory ) {
   // universal module definition
@@ -3467,7 +3532,7 @@ return Slide;
 
 }));
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * getSize v2.0.2
  * measure size of elements
@@ -3678,7 +3743,379 @@ return getSize;
 
 });
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
+/*!
+ * imagesLoaded v4.1.0
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'ev-emitter/ev-emitter'
+    ], function( EvEmitter ) {
+      return factory( window, EvEmitter );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else {
+    // browser global
+    window.imagesLoaded = factory(
+      window,
+      window.EvEmitter
+    );
+  }
+
+})( window,
+
+// --------------------------  factory -------------------------- //
+
+function factory( window, EvEmitter ) {
+
+'use strict';
+
+var $ = window.jQuery;
+var console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  var ary = [];
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    ary = obj;
+  } else if ( typeof obj.length == 'number' ) {
+    // convert nodeList to array
+    for ( var i=0; i < obj.length; i++ ) {
+      ary.push( obj[i] );
+    }
+  } else {
+    // array of single index
+    ary.push( obj );
+  }
+  return ary;
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {Array, Element, NodeList, String} elem
+ * @param {Object or Function} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  if ( typeof elem == 'string' ) {
+    elem = document.querySelectorAll( elem );
+  }
+
+  this.elements = makeArray( elem );
+  this.options = extend( {}, this.options );
+
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    extend( this.options, options );
+  }
+
+  if ( onAlways ) {
+    this.on( 'always', onAlways );
+  }
+
+  this.getImages();
+
+  if ( $ ) {
+    // add jQuery Deferred object
+    this.jqDeferred = new $.Deferred();
+  }
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( function() {
+    this.check();
+  }.bind( this ));
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.options = {};
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+/**
+ * @param {Node} element
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName == 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  var nodeType = elem.nodeType;
+  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
+    return;
+  }
+  var childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( var i=0; i < childImgs.length; i++ ) {
+    var img = childImgs[i];
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    var children = elem.querySelectorAll( this.options.background );
+    for ( i=0; i < children.length; i++ ) {
+      var child = children[i];
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+var elementNodeTypes = {
+  1: true,
+  9: true,
+  11: true
+};
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+    return;
+  }
+  // get url inside url("...")
+  var reURL = /url\((['"])?(.*?)\1\)/gi;
+  var matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    var url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  var loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  var background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  var _this = this;
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  function onProgress( image, elem, message ) {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( function() {
+      _this.progress( image, elem, message );
+    });
+  }
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  });
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount == this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( 'progress: ' + message, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  var eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  return this.img.complete && this.img.naturalWidth !== undefined;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.img, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) {
+    return;
+  }
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, callback ) {
+    var instance = new ImagesLoaded( this, options, callback );
+    return instance.jqDeferred.promise( $(this) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+});
+
+},{"ev-emitter":3}],19:[function(require,module,exports){
 /**
  * Outlayer Item
  */
@@ -4233,7 +4670,7 @@ return Item;
 
 }));
 
-},{"ev-emitter":3,"get-size":16}],18:[function(require,module,exports){
+},{"ev-emitter":3,"get-size":17}],20:[function(require,module,exports){
 /*!
  * Outlayer v2.1.0
  * the brains and guts of a layout library
@@ -5174,7 +5611,7 @@ return Outlayer;
 
 }));
 
-},{"./item":17,"ev-emitter":3,"fizzy-ui-utils":4,"get-size":16}],19:[function(require,module,exports){
+},{"./item":19,"ev-emitter":3,"fizzy-ui-utils":4,"get-size":17}],21:[function(require,module,exports){
 /**
  * Packery Item Element
 **/
@@ -5306,7 +5743,7 @@ return Item;
 
 }));
 
-},{"./rect":22,"outlayer":18}],20:[function(require,module,exports){
+},{"./rect":24,"outlayer":20}],22:[function(require,module,exports){
 /**
  * Packer
  * bin-packing algorithm
@@ -5505,7 +5942,7 @@ return Packer;
 
 }));
 
-},{"./rect":22}],21:[function(require,module,exports){
+},{"./rect":24}],23:[function(require,module,exports){
 /*!
  * Packery v2.1.1
  * Gapless, draggable grid layouts
@@ -6174,7 +6611,7 @@ return Packery;
 
 }));
 
-},{"./item":19,"./packer":20,"./rect":22,"get-size":16,"outlayer":18}],22:[function(require,module,exports){
+},{"./item":21,"./packer":22,"./rect":24,"get-size":17,"outlayer":20}],24:[function(require,module,exports){
 /**
  * Rect
  * low-level utility class for basic geometry
@@ -6328,7 +6765,7 @@ return Rect;
 
 }));
 
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * Tap listener v2.0.0
  * listens to taps
@@ -6443,7 +6880,7 @@ return TapListener;
 
 }));
 
-},{"unipointer":25}],24:[function(require,module,exports){
+},{"unipointer":27}],26:[function(require,module,exports){
 /*!
  * Unidragger v2.1.0
  * Draggable base class
@@ -6729,7 +7166,7 @@ return Unidragger;
 
 }));
 
-},{"unipointer":25}],25:[function(require,module,exports){
+},{"unipointer":27}],27:[function(require,module,exports){
 /*!
  * Unipointer v2.1.0
  * base class for doing one thing with pointer event
@@ -7034,11 +7471,13 @@ return Unipointer;
 
 }));
 
-},{"ev-emitter":3}],26:[function(require,module,exports){
+},{"ev-emitter":3}],28:[function(require,module,exports){
 'use strict';
 var Flickity = require('flickity');
 var Draggabilly = require('draggabilly');
 var Packery = require('packery');
+var masonImagesLoaded = require('imagesloaded');
+var imagesLoaded = require('flickity-imagesloaded');
 var Ajax = require('./global/ajax').Ajax;
 // var Gallery = require('./admin-gallery');
 var Notification = require('./global/notification');
@@ -7084,8 +7523,12 @@ function initPackery() {
     mason = new Packery( ms_selector, {
         itemSelector: '.ms-grid-item',
         columnWidth: 270,
-        percentPosition: true,
         gutter: 20
+    });
+
+    masonImagesLoaded(ms_selector).on('progress', function() {
+        console.log("here?")
+        mason.layout();
     });
 
     var order = [];
@@ -7151,7 +7594,8 @@ function initFlickity() {
         contain: true,
         draggable: false,
         pageDots: false,
-        cellAlign: 'left',
+        cellAlign: 'center',
+        imagesLoaded: true
         // prevNextButtons:false
     });
 
@@ -7163,9 +7607,13 @@ function initFlickity() {
 
 
 var upload_new_button = document.getElementById('upload-new-button');
+var upload_new_form = document.getElementById('upload-new-form');
     if (upload_new_button) {
         upload_new_button.addEventListener('click', function(e) {
             upload_new_button.innerHTML = '<i class="loading-spinner fa fa-spinner fa-pulse fa-3x fa-fw"></i>';
+        });
+        upload_new_form.addEventListener('submit', function(e) {
+            upload_new_button.disabled = true;
         });
     }
 
@@ -7392,7 +7840,7 @@ function handleSuccessfulEmail(message, fields) {
     }
 }
 
-},{"./global/ajax":27,"./global/modal":28,"./global/notification":29,"draggabilly":2,"flickity":10,"packery":21}],27:[function(require,module,exports){
+},{"./global/ajax":29,"./global/modal":30,"./global/notification":31,"draggabilly":2,"flickity":11,"flickity-imagesloaded":5,"imagesloaded":18,"packery":23}],29:[function(require,module,exports){
 'use strict';
 //AJAX
 
@@ -7411,7 +7859,7 @@ module.exports = {
     Ajax: Ajax
 };
 
-},{}],28:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 var Modal = function(child) {
    this.child = child;
@@ -7472,7 +7920,7 @@ Modal.prototype.unmount = function () {
 
 module.exports = Modal;
 
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var Notification = function(type, message, time) {
@@ -7560,4 +8008,4 @@ Notification.prototype.createList = function(callback) {
 
 module.exports = Notification;
 
-},{}]},{},[26])
+},{}]},{},[28])

@@ -2,6 +2,8 @@
 var Flickity = require('flickity');
 var Draggabilly = require('draggabilly');
 var Packery = require('packery');
+var masonImagesLoaded = require('imagesloaded');
+var imagesLoaded = require('flickity-imagesloaded');
 var Ajax = require('./global/ajax').Ajax;
 // var Gallery = require('./admin-gallery');
 var Notification = require('./global/notification');
@@ -47,8 +49,12 @@ function initPackery() {
     mason = new Packery( ms_selector, {
         itemSelector: '.ms-grid-item',
         columnWidth: 270,
-        percentPosition: true,
         gutter: 20
+    });
+
+    masonImagesLoaded(ms_selector).on('progress', function() {
+        console.log("here?")
+        mason.layout();
     });
 
     var order = [];
@@ -114,7 +120,8 @@ function initFlickity() {
         contain: true,
         draggable: false,
         pageDots: false,
-        cellAlign: 'left',
+        cellAlign: 'center',
+        imagesLoaded: true
         // prevNextButtons:false
     });
 
@@ -126,9 +133,13 @@ function initFlickity() {
 
 
 var upload_new_button = document.getElementById('upload-new-button');
+var upload_new_form = document.getElementById('upload-new-form');
     if (upload_new_button) {
         upload_new_button.addEventListener('click', function(e) {
             upload_new_button.innerHTML = '<i class="loading-spinner fa fa-spinner fa-pulse fa-3x fa-fw"></i>';
+        });
+        upload_new_form.addEventListener('submit', function(e) {
+            upload_new_button.disabled = true;
         });
     }
 

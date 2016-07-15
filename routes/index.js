@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
     Gallery().where({isFeatured: true}).then(function(images) {
 
         images.map(function(image){
-            image.img_tag = cloudinary.image(image.img_url, { width: 500, height: 500, crop: "fill" });
+            image.img_tag = cloudinary.image(image.cloudinary_id, { height: 500, crop: "fill" });
             return image;
         });
 
@@ -40,7 +40,9 @@ router.get('/gallery', function(req, res) {
         var ordered = data[1];
         var images = nulled.concat(ordered);
         images.map(function(image){
-            image.img_tag = cloudinary.image(image.img_url, { width: 270, height: 270, crop: "fill" });
+            image.img_tag = cloudinary.image(image.cloudinary_id, {angle: "exif", width: 270, crop: "scale"})
+
+            console.log("tag: ", image.img_tag);
             return image;
         });
         var messages, errors;

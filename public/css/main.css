@@ -9121,14 +9121,15 @@ body {
   width: 100vw;
   margin: 0;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* line 34, ../../src/styles/main.scss */
+/* line 35, ../../src/styles/main.scss */
 h4, h5, h6, p {
   line-height: 1.5;
 }
 
-/* line 38, ../../src/styles/main.scss */
+/* line 39, ../../src/styles/main.scss */
 .app {
   background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/carve.jpeg");
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/carve.jpeg");
@@ -9137,7 +9138,7 @@ h4, h5, h6, p {
   background-repeat: no-repeat;
 }
 
-/* line 45, ../../src/styles/main.scss */
+/* line 46, ../../src/styles/main.scss */
 .admin-app {
   background: white;
   width: 100%;
@@ -9145,7 +9146,7 @@ h4, h5, h6, p {
   margin-bottom: 50px;
 }
 
-/* line 52, ../../src/styles/main.scss */
+/* line 53, ../../src/styles/main.scss */
 .heading-box {
   height: auto;
   width: 100%;
@@ -9154,21 +9155,21 @@ h4, h5, h6, p {
   margin-bottom: 80px;
 }
 @media (max-width: 767px) {
-  /* line 52, ../../src/styles/main.scss */
+  /* line 53, ../../src/styles/main.scss */
   .heading-box {
     padding-left: 0px;
     padding-right: 0px;
   }
 }
 
-/* line 64, ../../src/styles/main.scss */
+/* line 65, ../../src/styles/main.scss */
 .jumbotron {
   background-color: rgba(249, 249, 249, 0.7);
   background: rgba(249, 249, 249, 0.7);
   border-radius: 0 0 3px 3px !important;
 }
 
-/* line 70, ../../src/styles/main.scss */
+/* line 71, ../../src/styles/main.scss */
 .header {
   text-align: center;
   color: white;
@@ -9177,7 +9178,7 @@ h4, h5, h6, p {
   margin-bottom: 40px;
 }
 
-/* line 78, ../../src/styles/main.scss */
+/* line 79, ../../src/styles/main.scss */
 .body-content {
   color: white;
   text-align: center;
@@ -9187,7 +9188,7 @@ h4, h5, h6, p {
   padding-right: 10%;
 }
 
-/* line 87, ../../src/styles/main.scss */
+/* line 88, ../../src/styles/main.scss */
 .call-to-action {
   width: 250px;
   margin-left: 50% !important;
@@ -9196,7 +9197,7 @@ h4, h5, h6, p {
   margin-top: 50px !important;
 }
 @media (max-width: 767px) {
-  /* line 87, ../../src/styles/main.scss */
+  /* line 88, ../../src/styles/main.scss */
   .call-to-action {
     padding: 20px;
     width: 250px;
@@ -9204,12 +9205,12 @@ h4, h5, h6, p {
   }
 }
 
-/* line 100, ../../src/styles/main.scss */
+/* line 101, ../../src/styles/main.scss */
 .btn-md, .btn-lg {
   margin: 10px;
 }
 
-/* line 104, ../../src/styles/main.scss */
+/* line 105, ../../src/styles/main.scss */
 .alert-dismissible {
   top: 18px;
   position: relative;
@@ -9217,44 +9218,44 @@ h4, h5, h6, p {
   font-size: 20px;
 }
 
-/* line 113, ../../src/styles/main.scss */
+/* line 114, ../../src/styles/main.scss */
 .polylist {
   list-style: none;
   padding: 0;
 }
-/* line 116, ../../src/styles/main.scss */
+/* line 117, ../../src/styles/main.scss */
 .polylist .polylist-item {
   padding: 20px;
   text-align: center;
   height: 166.66667px;
 }
-/* line 120, ../../src/styles/main.scss */
+/* line 121, ../../src/styles/main.scss */
 .polylist .polylist-item .polylist-text {
   color: #b63d32;
   font-family: 'Yellowtail', cursive;
 }
-/* line 125, ../../src/styles/main.scss */
+/* line 126, ../../src/styles/main.scss */
 .polylist .polybreak {
   margin: 0;
   padding: 0;
   border: 2px solid black;
 }
 
-/* line 132, ../../src/styles/main.scss */
+/* line 133, ../../src/styles/main.scss */
 .loading-spinner {
   font-size: 16px;
 }
 
-/* line 138, ../../src/styles/main.scss */
+/* line 139, ../../src/styles/main.scss */
 .contact-form label {
   color: white;
 }
-/* line 141, ../../src/styles/main.scss */
+/* line 142, ../../src/styles/main.scss */
 .contact-form input {
   color: white;
   font-size: 24px !important;
 }
-/* line 145, ../../src/styles/main.scss */
+/* line 146, ../../src/styles/main.scss */
 .contact-form .contact-message {
   width: 100%;
   height: 208px;
@@ -9263,7 +9264,7 @@ h4, h5, h6, p {
   padding: 10px;
 }
 
-/* line 153, ../../src/styles/main.scss */
+/* line 154, ../../src/styles/main.scss */
 label {
   font-size: 16px;
 }

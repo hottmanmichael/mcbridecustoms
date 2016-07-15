@@ -12,23 +12,37 @@
 /* cell inherit height from carousel */
 .carousel-cell {
     height: 100%;
-    // width: %;
+    // min-width: 300px;
     margin-right: 10px;
 }
 
 
 
 //Packery / Draggabilly
-.grid-sizer {
+// .grid-sizer {
+//     @include mobile {
+//         width: 100%;
+//         max-width: 100%;
+//     }
+//     @include tablet {
+//         width: 33.333%;
+//     }
+//     @include desktop {
+//         width: 20%;
+//     }
+// }
+.ms-grid {
+    @include mobile {
+        text-align: center;
+    }
+}
+.ms-grid-item {
+    float: left;
+    cursor: pointer;
+    text-align: left;
     @include mobile {
         width: 100%;
-        max-width: 100%;
-    }
-    @include tablet {
-        width: 33.333%;
-    }
-    @include desktop {
-        width: 20%;
+        margin: 0 auto;
     }
 }
 

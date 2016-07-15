@@ -32,6 +32,7 @@ router.get('/', function(req, res) {
         last_logged_in: moment(lli).fromNow()
     };
     res.render('admin/admin', {
+        page_title: 'Admin Home',
         user: user
     });
 });
@@ -47,10 +48,26 @@ router.get('/gallery', function(req, res) {
         var nulled = data[0];
         var ordered = data[1];
         var images = nulled.concat(ordered);
-        images.map(function(image){
-            image.img_tag = cloudinary.image(image.img_url, { width: 270, height: 270, crop: "fill" });
+        //deep copy array of images to change the properties on only ONE of the arrays
+        var allimages = JSON.parse(JSON.stringify(images));
+        var featured = [];
+
+        allimages.forEach(function(img) {
+            console.log("img: ", img.isFeatured);
+
+            if (img.isFeatured) {
+                img.img_tag = cloudinary.image(img.cloudinary_id, { height: 270, angle: "exif" });
+                featured.push(img);
+            }
+        });
+
+
+        images.forEach(function(image){
+
+            image.img_tag = cloudinary.image(image.cloudinary_id, { width: 270, angle: "exif" });
             return image;
         });
+
         var messages, errors;
         if (req.session.messages) {
             messages = req.session.messages;
@@ -60,8 +77,12 @@ router.get('/gallery', function(req, res) {
             errors = req.session.errors;
             req.session.errors = null;
         }
+
+
         return res.render('admin/gallery', {
+            page_title: 'Gallery',
             images: images,
+            featured: featured,
             messages: messages,
             errors: errors
         });
@@ -77,7 +98,7 @@ router.get('/gallery/upload', function(req, res) {
             var diffMins = now.diff(up, 'minutes');
             if (diffMins < 20) {
                 image.uploaded_at = moment(image.uploaded_at).fromNow();
-                image.img_tag = cloudinary.image(image.img_url, { width: 300, height: 300, crop: "fill" });
+                image.img_tag = cloudinary.image(image.cloudinary_id, { height: 270, angle: "exif" });
                 return true;
             } else {
                 return false;
@@ -93,6 +114,7 @@ router.get('/gallery/upload', function(req, res) {
             req.session.errors = null;
         }
         return res.render('admin/upload', {
+            page_title: 'Upload',
             images: images,
             messages: messages,
             errors: errors
@@ -102,31 +124,64 @@ router.get('/gallery/upload', function(req, res) {
 
 //post upload photo
 router.post('/gallery/upload', function(req, res) {
-    var data = {};
+
     uploader.upload(req).then(function(uploaded) {
-        if (!uploaded.formData.isFeatured) {
-            uploaded.formData.isFeatured = false;
-        } else {uploaded.formData.isFeatured = true;}
-
-        data.uploadData = uploaded;
-
-        uploader.toCloud(data.uploadData.image.file).then(function(result) {
-            data.cloudData = result;
-            uploader.toDatabase({
-                cloud: data.cloudData,
-                upload: data.uploadData
-            }).then(function(db_data) {
-                uploader.removeFromDir(data.uploadData).then(function(success) {console.log('removed image from dir');});
-                res.redirect('/admin/gallery/upload');
-            }).catch(function(err) {
-                console.error("Error saving to database", err);
+        // data.uploadData = uploaded;
+        uploader.toCloud(uploaded.images).then(function(results) {
+            // data.cloudData = results;
+            var done = 0;
+            results.forEach(function(image) {
+                uploader.toDatabase({
+                    slug: image.original_filename,
+                    img_url: image.url,
+                    cloudinary_id: image.public_id
+                }).then(function(db) {
+                    ++done;
+                    var imgToRemove = image.original_filename + "." + image.format;
+                    uploader.removeFromDir(imgToRemove, function(err, success) {
+                        if (err) {return console.error(err);}
+                        // console.log("file removed from dir successfully", success);
+                    });
+                    if (done === uploaded.images.length) {
+                        uploader.deleteDir(function(err, success) {
+                            if (err) {return console.error(err);}
+                            // console.log("dir deleted", success);
+                        });
+                        res.redirect('/admin/gallery/upload');
+                    }
+                });
             });
-        }).catch(function(err) {
-            console.error("Error saving to cloud:", err);
         });
-    }).catch(function(err) {
-        console.error("Error saving to filesystem", err);
     });
+
+
+
+    //
+    // var data = {};
+    // uploader.upload(req).then(function(uploaded) {
+    //     // if (!uploaded.formData.isFeatured) {
+    //     //     uploaded.formData.isFeatured = false;
+    //     // } else {uploaded.formData.isFeatured = true;}
+    //
+    //     data.uploadData = uploaded;
+    //
+    //     uploader.toCloud(data.uploadData.image.file).then(function(result) {
+    //         data.cloudData = result;
+    //         uploader.toDatabase({
+    //             cloud: data.cloudData,
+    //             upload: data.uploadData
+    //         }).then(function(db_data) {
+    //             uploader.removeFromDir(data.uploadData).then(function(success) {console.log('removed image from dir');});
+    //             res.redirect('/admin/gallery/upload');
+    //         }).catch(function(err) {
+    //             console.error("Error saving to database", err);
+    //         });
+    //     }).catch(function(err) {
+    //         console.error("Error saving to cloud:", err);
+    //     });
+    // }).catch(function(err) {
+    //     console.error("Error saving to filesystem", err);
+    // });
 });
 
 
@@ -157,7 +212,7 @@ router.put('/gallery/edit/isfeatured', function(req, res, next) {
         }
         Gallery().where({slug: slug}).update({
             isFeatured: method
-        }).returning('img_url').then(function(updated) {
+        }).returning('cloudinary_id').then(function(updated) {
             var imgUrl = updated[0];
             //if add
             if (action === 'add') {
@@ -166,7 +221,7 @@ router.put('/gallery/edit/isfeatured', function(req, res, next) {
                     method: action,
                     slug: slug,
                     data: updated,
-                    tag: cloudinary.image(imgUrl, { width: 300, height: 300, crop: "fill" }),
+                    tag: cloudinary.image(imgUrl, { height: 270, angle: 'exif' }),
                     message: 'Image added to featured list'
                 });
             }
@@ -252,7 +307,11 @@ router.get('/settings', function(req, res) {
         messages = req.session.messages;
         req.session.messages = null;
     }
-    res.render('admin/settings', {errors: errors, messages: messages});
+    res.render('admin/settings', {
+        page_title: 'Settings',
+        errors: errors,
+        messages: messages
+    });
 });
 
 

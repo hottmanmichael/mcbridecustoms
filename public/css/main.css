@@ -62,26 +62,27 @@
 }
 
 @media (max-width: 767px) {
-  /* line 22, ../../src/styles/_flickity.scss */
-  .grid-sizer {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* line 22, ../../src/styles/_flickity.scss */
-  .grid-sizer {
-    width: 33.333%;
-  }
-}
-@media (min-width: 1024px) {
-  /* line 22, ../../src/styles/_flickity.scss */
-  .grid-sizer {
-    width: 20%;
+  /* line 34, ../../src/styles/_flickity.scss */
+  .ms-grid {
+    text-align: center;
   }
 }
 
-/* line 35, ../../src/styles/_flickity.scss */
+/* line 39, ../../src/styles/_flickity.scss */
+.ms-grid-item {
+  float: left;
+  cursor: pointer;
+  text-align: left;
+}
+@media (max-width: 767px) {
+  /* line 39, ../../src/styles/_flickity.scss */
+  .ms-grid-item {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* line 49, ../../src/styles/_flickity.scss */
 .packery-drop-placeholder {
   outline: 3px dashed #3c1d17;
   outline-offset: -6px;

@@ -1,16 +1,14 @@
 
 <% if (carousel_class === 'admin') { %>
     <div class="main-carousel <%= carousel_class %>">
-        <% if (images) { %>
-            <% images.forEach(function(image) { %>
-                <% if (image.isFeatured) { %>
-                    <div class="carousel-cell" id="cell-<%=image.slug%>">
-                        <form class="remove-from-featured" action="/admin/gallery/edit/isfeatured?slug=<%=image.slug%>&action=remove&_method=put" method="post">
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="remove fa fa-minus-square"></i> Remove From Featured</button>
-                        </form>
-                        <%- image.img_tag %>
-                    </div>
-                <% } %>
+        <% if (featured) { %>
+            <% featured.forEach(function(image) { %>
+                <div class="carousel-cell" id="cell-<%=image.slug%>">
+                    <form class="remove-from-featured" action="/admin/gallery/edit/isfeatured?slug=<%=image.slug%>&action=remove&_method=put" method="post">
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="remove fa fa-minus-square"></i> Remove From Featured</button>
+                    </form>
+                    <%- image.img_tag %>
+                </div>
             <% }) %>
         <% } %>
     </div>

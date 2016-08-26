@@ -16,6 +16,8 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
+var tinify = require('tinify');
+tinify.key = process.env.TINIFY_API_KEY;
 
 
 const UPLOAD_DIR =  path.resolve(__dirname, "./public/uploads");
@@ -90,7 +92,18 @@ var uploader = {
                         files = [files];
                     }
 
+
                     files.forEach(function(file) {
+
+                        console.log("FILE: ", file.size);
+
+                        if (file.size > 1000000) { //1MB
+                            var source = tinify.fromFile(file.path);
+                            console.log("source: ", source);
+                            source.toFile(file.path);
+                        }
+                        console.log("file size after! ", file.size);
+
                         var imgData = {
                             fullpath: file.path,
                             type: file.ext,
